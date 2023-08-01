@@ -16,5 +16,8 @@ namespace tabuleiro {
             this.qteMoviemebntos = 0;
 
         }
+        public void incrementarQteMovimentos() { 
+            qteMoviemebntos++; 
+        }
     }
 }
