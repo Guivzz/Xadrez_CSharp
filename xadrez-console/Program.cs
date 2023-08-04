@@ -10,10 +10,7 @@ namespace xadrez_console {
                 while (!partida.terminada) {
                     try {                       
                         Console.Clear();
-                        Tela.imprimirTabuleiro(partida.tab);
-                        Console.WriteLine();
-                        Console.WriteLine("Turno: " + partida.turno);
-                        Console.WriteLine("Aguardando jogada: " + partida.jogadorAtual);
+                        Tela.imprimirPartida(partida);
                         Console.Write("Origem: ");
                         Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
                         partida.validarPosicaoDeOrigem(origem);
@@ -28,8 +25,21 @@ namespace xadrez_console {
                     catch (TabuleiroException e) {
                         Console.WriteLine(e.Message);
                         Console.WriteLine();
-                        Console.WriteLine("Pressione qualquer tecla para continuar...");
-                        Console.ReadLine();
+                        Console.WriteLine("Reiniciando em 5 segundos...");
+                        DateTime horaInicio = DateTime.Now;
+                        DateTime horaTermino = horaInicio.AddSeconds(5);
+                        int segundos = 0;
+                        
+                        while (DateTime.Now < horaTermino) {
+                            
+                            segundos++;
+                            
+                            Console.Write("\rFaltam " + segundos + " Segundos... Para reiniciar.");
+                            // Esperar um pouco para não sobrecarregar o processador
+                            System.Threading.Thread.Sleep(1000);
+                        }
+                        
+
                     }
                 }
             }
