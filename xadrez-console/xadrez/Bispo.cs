@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.Design;
-using tabuleiro;
+﻿using tabuleiro;
 
 namespace xadrez {
-    internal class Torre : Peca {
-        public Torre(Tabuleiro tab, Cor cor) : base(tab, cor) {
+    internal class Bispo : Peca {
+        public Bispo(Tabuleiro tab, Cor cor) : base(tab, cor) {
         }
         public override string ToString() {
-            return "T";
+            return "B";
         }
+
         private bool podeMover(Posicao pos) {
             Peca p = tab.peca(pos);
             return p == null || p.cor != cor;
@@ -17,47 +17,48 @@ namespace xadrez {
 
             Posicao pos = new Posicao(0, 0);
 
-            // acima
-            pos.definirValores(posicao.linha - 1, posicao.coluna);
+
+            //Nordeste
+            pos.definirValores(posicao.linha - 1, posicao.coluna + 1);
             while (tab.posicaoValida(pos) && podeMover(pos)) {
                 mat[pos.linha, pos.coluna] = true;
                 if (tab.peca(pos) != null && tab.peca(pos).cor != cor) {
                     break;
                 }
-                pos.linha = pos.linha - 1;
+                pos.definirValores(pos.linha - 1, pos.coluna + 1);
+            }
+            //Suldeste
+            pos.definirValores(posicao.linha + 1, posicao.coluna + 1);
+            while (tab.posicaoValida(pos) && podeMover(pos)) {
+                mat[pos.linha, pos.coluna] = true;
+                if (tab.peca(pos) != null && tab.peca(pos).cor != cor) {
+                    break;
+                }
+                pos.definirValores(pos.linha + 1, pos.coluna + 1);
             }
 
-            // abaixo
-            pos.definirValores(posicao.linha + 1, posicao.coluna);
+            //Sudoeste
+            pos.definirValores(posicao.linha + 1, posicao.coluna - 1);
             while (tab.posicaoValida(pos) && podeMover(pos)) {
                 mat[pos.linha, pos.coluna] = true;
                 if (tab.peca(pos) != null && tab.peca(pos).cor != cor) {
                     break;
                 }
-                pos.linha = pos.linha + 1;
+                pos.definirValores(pos.linha + 1, pos.coluna - 1);
             }
 
-            // direita
-            pos.definirValores(posicao.linha, posicao.coluna + 1);
+            //Noroeste
+            pos.definirValores(posicao.linha - 1, posicao.coluna - 1);
             while (tab.posicaoValida(pos) && podeMover(pos)) {
                 mat[pos.linha, pos.coluna] = true;
                 if (tab.peca(pos) != null && tab.peca(pos).cor != cor) {
                     break;
                 }
-                pos.coluna = pos.coluna + 1;
-            }
-
-            // esquerda
-            pos.definirValores(posicao.linha, posicao.coluna - 1);
-            while (tab.posicaoValida(pos) && podeMover(pos)) {
-                mat[pos.linha, pos.coluna] = true;
-                if (tab.peca(pos) != null && tab.peca(pos).cor != cor) {
-                    break;
-                }
-                pos.coluna = pos.coluna - 1;
+                pos.definirValores(pos.linha - 1, pos.coluna - 1);
             }
 
             return mat;
         }
+
     }
 }
