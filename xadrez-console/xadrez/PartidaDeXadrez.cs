@@ -34,7 +34,7 @@ namespace xadrez {
                 capturadas.Add(pecaCapturada);
             }
 
-            // #jogadaespecial roque pequeno
+            // #Jogadaespecial roque pequeno
             if (p is Rei && destino.coluna == origem.coluna + 2) {
                 Posicao origemT = new Posicao(origem.linha, origem.coluna + 3);
                 Posicao destinoT = new Posicao(origem.linha, origem.coluna + 1);
@@ -43,7 +43,7 @@ namespace xadrez {
                 tab.colocarPeca(T, destinoT);
             }
 
-            // #jogadaespecial roque grande
+            // #Jogadaespecial roque grande
             if (p is Rei && destino.coluna == origem.coluna - 2) {
                 Posicao origemT = new Posicao(origem.linha, origem.coluna - 4);
                 Posicao destinoT = new Posicao(origem.linha, origem.coluna - 1);
@@ -52,7 +52,7 @@ namespace xadrez {
                 tab.colocarPeca(T, destinoT);
             }
 
-            // #jogadaespecial en passant
+            // #Jogadaespecial en passant
             if (p is Peao) {
                 if (origem.coluna != destino.coluna && pecaCapturada == null) {
                     Posicao posP;
@@ -66,7 +66,7 @@ namespace xadrez {
                     capturadas.Add(pecaCapturada);
                 }
             }
-
+            
             return pecaCapturada;
         }
 
@@ -79,7 +79,7 @@ namespace xadrez {
             }
             tab.colocarPeca(p, origem);
 
-            // #jogadaespecial roque pequeno
+            // #Jogadaespecial roque pequeno
             if (p is Rei && destino.coluna == origem.coluna + 2) {
                 Posicao origemT = new Posicao(origem.linha, origem.coluna + 3);
                 Posicao destinoT = new Posicao(origem.linha, origem.coluna + 1);
@@ -88,7 +88,7 @@ namespace xadrez {
                 tab.colocarPeca(T, origemT);
             }
 
-            // #jogadaespecial roque grande
+            // #Jogadaespecial roque grande
             if (p is Rei && destino.coluna == origem.coluna - 2) {
                 Posicao origemT = new Posicao(origem.linha, origem.coluna - 4);
                 Posicao destinoT = new Posicao(origem.linha, origem.coluna - 1);
@@ -97,7 +97,7 @@ namespace xadrez {
                 tab.colocarPeca(T, origemT);
             }
 
-            // #jogadaespecial en passant
+            // #Jogadaespecial en passant
             if (p is Peao) {
                 if (origem.coluna != destino.coluna && pecaCapturada == vulneravelEnPassant) {
                     Peca peao = tab.retirarPeca(destino);
@@ -123,7 +123,7 @@ namespace xadrez {
 
             Peca p = tab.peca(destino);
 
-            // #jogadaespecial promocao
+            // #Jogadaespecial promocao
             if (p is Peao) {
                 if ((p.cor == Cor.Branca && destino.linha == 0) || (p.cor == Cor.Preta && destino.linha == 7)) {
                     p = tab.retirarPeca(destino);
@@ -148,8 +148,8 @@ namespace xadrez {
                 turno++;
                 mudaJogador();
             }
-
-            // #jogadaespecial en passant
+            
+            // #Jogadaespecial en passant
             if (p is Peao && (destino.linha == origem.linha - 2 || destino.linha == origem.linha + 2)) {
                 vulneravelEnPassant = p;
             }
